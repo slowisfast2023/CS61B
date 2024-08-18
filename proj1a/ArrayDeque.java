@@ -17,7 +17,7 @@ public class ArrayDeque<T> {
         items = a;
     }
 
-    /* Adds an T of type T to the front of the deque. */
+    /* Adds an item of type T to the front of the deque. */
     public void addFirst(T item) {
         if(size == items.length) {
             resize(size * 2);
@@ -27,7 +27,7 @@ public class ArrayDeque<T> {
         size = size + 1;
     }
 
-    /* Adds an T of type T to the back of the deque. */
+    /* Adds an item of type T to the back of the deque. */
     public void addLast(T item) {
         if(size == items.length) {
             resize(size * 2);
@@ -38,19 +38,15 @@ public class ArrayDeque<T> {
 
     /* Returns true if deque is empty, false otherwise. */
     public boolean isEmpty() {
-        if(size == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return size == 0;
     }
 
-    /* Returns the number of Ts in the deque. */
+    /* Returns the number of items in the deque. */
     public int size() {
         return size;
     }
 
-    /** Prints the Ts in the deque from first to last,
+    /** Prints the items in the deque from first to last,
       * separated by a space. */
     public void printDeque() {
         for (int i = 0; i < size; i++) {
@@ -58,7 +54,7 @@ public class ArrayDeque<T> {
         }
     }
 
-    /** Removes and returns the T at the front of the deque.
+    /** Removes and returns the item at the front of the deque.
       * If no such T exists, returns null. */
     public T removeFirst() {
         if (size == 0) {
@@ -68,7 +64,7 @@ public class ArrayDeque<T> {
             System.arraycopy(items, 1, items, 0, size - 1);
             items[size - 1] = null;
             size = size - 1;
-            float UsageRatio = size / items.length;
+            float UsageRatio = (float) size / items.length;
             if (items.length >= 16 && UsageRatio < 0.25) {
                 resize(items.length / 2);
             }
@@ -76,7 +72,7 @@ public class ArrayDeque<T> {
         }
     }
 
-    /** Removes and returns the T at the back of the deque.
+    /** Removes and returns the item at the back of the deque.
       * If no such T exists, returns null.*/
     public T removeLast() {
         if (size == 0) {
@@ -85,7 +81,7 @@ public class ArrayDeque<T> {
             T last = items[size - 1];
             items[size - 1] = null;
             size = size - 1;
-            float UsageRatio = size / items.length;
+            float UsageRatio = (float) size / items.length;
             if (items.length >= 16 && UsageRatio < 0.25) {
                 resize(items.length / 2);
             }
@@ -93,10 +89,10 @@ public class ArrayDeque<T> {
         }
     }
 
-    /** Gets the T at the given index.
+    /** Gets the item at the given index.
       * If no such T exists, returns null. */
     public T get(int index) {
-        if (index > size - 1) {
+        if (index <0 || index > size - 1) {
             return null;
         } else {
             return items[index];
