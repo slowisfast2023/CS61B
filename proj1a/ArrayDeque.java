@@ -4,6 +4,7 @@
 public class ArrayDeque<T> {
     private T[] items;
     private int size;
+    private float UsageRatio = size / items.length;
 
     /* Creates an empty array deque. */
     public ArrayDeque() {
@@ -68,6 +69,9 @@ public class ArrayDeque<T> {
             System.arraycopy(items, 1, items, 0, size - 1);
             items[size - 1] = null;
             size = size - 1;
+            if (items.length >= 16 && UsageRatio < 0.25) {
+                resize(items.length / 2);
+            }
             return first;
         }
     }
@@ -81,9 +85,13 @@ public class ArrayDeque<T> {
             T last = items[size - 1];
             items[size - 1] = null;
             size = size - 1;
+            if (items.length >= 16 && UsageRatio < 0.25) {
+                resize(items.length / 2);
+            }
             return last;
         }
     }
+
     /** Gets the T at the given index.
       * If no such T exists, returns null. */
     public T get(int index) {
@@ -93,5 +101,4 @@ public class ArrayDeque<T> {
             return items[index];
         }
     }
-
 }
