@@ -19,7 +19,7 @@ public class ArrayDeque<T> {
 
     /* Adds an item of type T to the front of the deque. */
     public void addFirst(T item) {
-        if(size == items.length) {
+        if (size == items.length) {
             resize(size * 2);
         }
         System.arraycopy(items, 0, items, 1, size);
@@ -29,7 +29,7 @@ public class ArrayDeque<T> {
 
     /* Adds an item of type T to the back of the deque. */
     public void addLast(T item) {
-        if(size == items.length) {
+        if (size == items.length) {
             resize(size * 2);
         }
         items[size] = item;
@@ -64,8 +64,8 @@ public class ArrayDeque<T> {
             System.arraycopy(items, 1, items, 0, size - 1);
             items[size - 1] = null;
             size = size - 1;
-            float UsageRatio = (float) size / items.length;
-            if (items.length >= 16 && UsageRatio < 0.25) {
+            float usageRatio = (float) size / items.length;
+            if (items.length >= 16 && usageRatio < 0.25) {
                 resize(items.length / 2);
             }
             return first;
@@ -81,8 +81,8 @@ public class ArrayDeque<T> {
             T last = items[size - 1];
             items[size - 1] = null;
             size = size - 1;
-            float UsageRatio = (float) size / items.length;
-            if (items.length >= 16 && UsageRatio < 0.25) {
+            float usageRatio = (float) size / items.length;
+            if (items.length >= 16 && usageRatio < 0.25) {
                 resize(items.length / 2);
             }
             return last;
@@ -92,7 +92,7 @@ public class ArrayDeque<T> {
     /** Gets the item at the given index.
       * If no such T exists, returns null. */
     public T get(int index) {
-        if (index <0 || index > size - 1) {
+        if (index < 0 || index > size - 1) {
             return null;
         } else {
             return items[index];
