@@ -1,0 +1,89 @@
+/** Array based list.
+ *  @author Chenguang Dai
+ */
+public class ArrayDeque<Item> {
+    private Item[] items;
+    private int size;
+
+    /* Creates an empty array deque. */
+    public ArrayDeque() {
+        items = (Item[]) new Object[8];
+        size = 0;
+    }
+
+    private void resize(int capacity) {
+        Item[] a = (Item[]) new Object[capacity];
+        System.arraycopy(items, 0, a, 0, size);
+        items = a;
+    }
+
+    /* Adds an item of type Item to the front of the deque. */
+    public void addFirst(Item item) {
+        if(size == items.length) {
+            resize(size * 2);
+        }
+        System.arraycopy(items, 0, items, 1, size);
+        items[0] = item;
+        size = size + 1;
+    }
+
+    /* Adds an item of type Item to the back of the deque. */
+    public void addLast(Item item) {
+        if(size == items.length) {
+            resize(size * 2);
+        }
+        items[size] = item;
+        size = size + 1;
+    }
+
+    /* Returns true if deque is empty, false otherwise. */
+    public boolean isEmpty() {
+        if(size == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /* Returns the number of items in the deque. */
+    public int size() {
+        return size;
+    }
+
+    /** Prints the items in the deque from first to last,
+      * separated by a space. */
+    public void printDeque() {
+        for (int i = 0; i < size; i++) {
+            System.out.print(items[i] + " ");
+        }
+    }
+
+    /** Removes and returns the item at the front of the deque.
+      * If no such item exists, returns null. */
+    public Item removeFirst() {
+        Item first = items[0];
+        System.arraycopy(items, 1, items, 0, size - 1);
+        items[size -1] = null;
+        size = size -1;
+        return first;
+    }
+
+    /** Removes and returns the item at the back of the deque.
+      * If no such item exists, returns null.*/
+    public Item removeLast() {
+        Item last = items[size -1];
+        items[size - 1] = null;
+        size = size - 1;
+        return last;
+    }
+    /** Gets the item at the given index.
+      * If no such item exists, returns null. */
+    public Item get(int index) {
+        if (index > size - 1) {
+            return null;
+        } else {
+            return items[index];
+        }
+    }
+
+}
